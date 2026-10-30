@@ -1,9 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Press+Start+2P&family=VT323&display=swap');
+
 :root {
-  --font-display:
-    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol, Noto Color Emoji;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --color-cream: #FAF7EE;
+  --color-cream-dark: #F0EAD6;
+  --color-rose: #FF85A1;
+  --color-rose-soft: #FFB3C6;
+  --color-rose-deep: #E75480;
+  --color-midnight: #1A1C2E;
+  --color-midnight-dark: #121320;
+  --color-mint: #8EE4AF;
+  --color-mint-dark: #5CDB95;
+  --color-sun: #FFD166;
+  --color-sun-dark: #F4A261;
+  --color-ink: #1E1E24;
+  --color-paper: #FFFDF9;
+  
+  --font-pixel: 'Press Start 2P', cursive, monospace;
+  --font-retro: 'VT323', monospace;
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --pixel-border: 3px solid #1E1E24;
+  --pixel-border-sm: 2px solid #1E1E24;
+  --pixel-shadow: 4px 4px 0px #1E1E24;
+  --pixel-shadow-sm: 2px 2px 0px #1E1E24;
+  --pixel-shadow-lg: 6px 6px 0px #1E1E24;
+  --pixel-shadow-pressed: 1px 1px 0px #1E1E24;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-body);
+  background-color: #EDE8D5;
+  color: #1E1E24;
+  overflow-x: hidden;
+}
+
+/* Crisp pixel rendering */
+.pixelated, svg.pixel-art, img.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  shape-rendering: crispEdges;
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 6px 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.4);
+}
+
+/* Scanline flicker */
+@keyframes crt-flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* Pixel animations */
+@keyframes pixel-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pixel-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+@keyframes pixel-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes raindrop-fall {
+  0% { transform: translateY(-10px); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(60px); opacity: 0; }
+}
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  25% { transform: scale(1.08, 0.95); opacity: 1; }
+  50% { transform: scale(0.95, 1.05); opacity: 0.85; }
+  75% { transform: scale(1.05, 1.02); opacity: 0.95; }
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes ocean-ripple {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(6px); }
+}
+
+.animate-pixel-bounce {
+  animation: pixel-bounce 1.6s ease-in-out infinite;
+}
+
+.animate-pixel-float {
+  animation: pixel-float 2.4s ease-in-out infinite;
+}
+
+.animate-pixel-pulse {
+  animation: pixel-pulse 1.2s ease-in-out infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F0EAD6;
+  border-left: 2px solid #1E1E24;
+}
+::-webkit-scrollbar-thumb {
+  background: #FF85A1;
+  border: 2px solid #1E1E24;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E75480;
 }
